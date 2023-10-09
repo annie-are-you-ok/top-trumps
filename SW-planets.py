@@ -22,73 +22,83 @@ def random_planets ():
     'orbital period': int(planet['orbital_period']),
     }
 
-def run():
-    my_score = 0
-    opponent_score = 0
+def play_game():
+    def run():
+        my_score = 0
+        opponent_score = 0
 
-    for rounds in range(1, 4):
-        print(f'Round {rounds}\n')
+        for rounds in range(1, 4):
+            print(f'Round {rounds}\n')
 
-        my_planet = random_planets()
-        print(f"You were given {(my_planet['name'])}")
+            my_planet = random_planets()
+            print(f"You were given {(my_planet['name'])}")
 
-        # print(my_planet['diameter']) #to check unknown is being converted to 0
-        # print(my_planet['population'])
-        # print(my_planet['orbital period'])
+            # print(my_planet['diameter']) #to check unknown is being converted to 0
+            # print(my_planet['population'])
+            # print(my_planet['orbital period'])
 
-        print(f"Diameter: {(my_planet['diameter'])}")
-        print(f"Population: {(my_planet['population'])}")
-        print(f"Orbital period: {(my_planet['orbital period'])}\n")
-
-        stat_choice = input('Which stat do you want to use? (diameter, population, orbital period) ')
-
-        if stat_choice == 'diameter':
             print(f"Diameter: {(my_planet['diameter'])}")
-        elif stat_choice == 'population':
             print(f"Population: {(my_planet['population'])}")
-        elif stat_choice == 'orbital period':
-            print(f"Orbital period: {(my_planet['orbital period'])}")
+            print(f"Orbital period: {(my_planet['orbital period'])}\n")
 
-        opponent_planet = random_planets()
-        print(f"\nYour opponent was given {(opponent_planet['name'])}")
+            stat_choice = input('Which stat do you want to use? (diameter, population, orbital period) ')
 
-        if stat_choice == 'diameter':
-            print(f"Diameter: {(opponent_planet['diameter'])}")
-        elif stat_choice == 'population':
-            print(f"Population: {(opponent_planet['population'])}")
-        elif stat_choice == 'orbital period':
-            print(f"Orbital Period: {(opponent_planet['orbital period'])}")
+            if stat_choice == 'diameter':
+                print(f"Diameter: {(my_planet['diameter'])}")
+            elif stat_choice == 'population':
+                print(f"Population: {(my_planet['population'])}")
+            elif stat_choice == 'orbital period':
+                print(f"Orbital period: {(my_planet['orbital period'])}")
 
-        my_stat = my_planet[stat_choice]
-        opponent_stat = opponent_planet[stat_choice]
+            opponent_planet = random_planets()
+            print(f"\nYour opponent was given {(opponent_planet['name'])}")
 
-        if my_stat > opponent_stat:
-            my_score = my_score + 1
-            opponent_score = opponent_score + 0
-            print('\nYou win the round!\n')
+            if stat_choice == 'diameter':
+                print(f"Diameter: {(opponent_planet['diameter'])}")
+            elif stat_choice == 'population':
+                print(f"Population: {(opponent_planet['population'])}")
+            elif stat_choice == 'orbital period':
+                print(f"Orbital Period: {(opponent_planet['orbital period'])}")
 
-        elif my_stat < opponent_stat:
-            my_score = my_score + 0
-            opponent_score = opponent_score + 1
-            print('\nYou lose the round!\n')
+            my_stat = my_planet[stat_choice]
+            opponent_stat = opponent_planet[stat_choice]
 
+            if my_stat > opponent_stat:
+                my_score = my_score + 1
+                opponent_score = opponent_score + 0
+                print('\nYou win the round!\n')
+
+            elif my_stat < opponent_stat:
+                my_score = my_score + 0
+                opponent_score = opponent_score + 1
+                print('\nYou lose the round!\n')
+
+            else:
+                print('\nDraw!\n')
+                my_score = my_score + 0
+                opponent_score = opponent_score + 0
+
+        print('--------------------\nEnd of Game\n--------------------\n')
+
+        print(f'Your Final Score: {my_score}')
+        print(f"Your Opponent's Final Score: {opponent_score}\n")
+
+        if my_score > opponent_score:
+            print('You win the game!\n')
+        elif my_score < opponent_score:
+            print('Your opponent wins the game!\n')
         else:
-            print('\nDraw!\n')
-            my_score = my_score + 0
-            opponent_score = opponent_score + 0
+            print('The game was a draw\n')
+        
+    run()
 
-    print('--------------------\nEnd of Game\n--------------------\n')
+play_game()
 
-    print(f'Your Final Score: {my_score}')
-    print(f"Your Opponent's Final Score: {opponent_score}\n")
+play_again = input('Want to play again? (yes/no)')
+if play_again == 'yes':
+    play_game()
+else:
+    exit
 
-    if my_score > opponent_score:
-        print('You win the game!\n')
-    elif my_score < opponent_score:
-        print('Your opponent wins the game!\n')
-    else:
-        print('The game was a draw\n')
 
-run()
-
-#would you like to play again?
+#keep final scores from previous game and add to it
